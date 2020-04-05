@@ -14,7 +14,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "client": "npm run start",
+    "server": "cd backend && nodemon server",
+    "client-install": "npm install",
+    "server-install": "cd backend && npm install",
+    "install-all": "concurrently \"npm run server-install \" \"npm run client-install \"", 
+    "dev": "concurrently \"npm run client\" \"npm run server\" "
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -32,3 +38,47 @@
     ]
   }
 }
+
+
+
+
+// {
+//   "name": "mern-exercise-tracker",
+//   "version": "0.1.0",
+//   "private": true,
+//   "dependencies": {
+//     "@testing-library/jest-dom": "^4.2.4",
+//     "@testing-library/react": "^9.5.0",
+//     "@testing-library/user-event": "^7.2.1",
+//     "react": "^16.13.1",
+//     "react-dom": "^16.13.1",
+//     "react-scripts": "3.4.1"
+//   },
+//   "scripts": {
+//     "start": "react-scripts start",
+//     "build": "react-scripts build",
+//     "test": "react-scripts test",
+//     "eject": "react-scripts eject",
+//     "client": "npm run start",
+//     "server": "cd backend && nodemon server",
+//     "client-install": "cd client && npm install",
+//     "server-install": "cd server && npm install",
+//     "install-all": "concurrently \"npm run server-install \" \"npm run client-install \"", 
+//     "dev": "concurrently \"npm run client\" \"npm run server\" "
+//   },
+//   "eslintConfig": {
+//     "extends": "react-app"
+//   },
+//   "browserslist": {
+//     "production": [
+//       ">0.2%",
+//       "not dead",
+//       "not op_mini all"
+//     ],
+//     "development": [
+//       "last 1 chrome version",
+//       "last 1 firefox version",
+//       "last 1 safari version"
+//     ]
+//   }
+// }
