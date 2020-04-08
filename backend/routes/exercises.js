@@ -30,9 +30,9 @@ router.post('/add', async (req, res) => {
 
 })
 
-router.get('/:id', async (req, res) => {
+router.get('/:username', async (req, res) => {
     try {
-        const exersice = await Exersice.findById(req.params.id);
+        const exersice = await Exersice.find({username: `${req.params.username}`} );
         res.json(exersice);
     }
     catch (error) {
