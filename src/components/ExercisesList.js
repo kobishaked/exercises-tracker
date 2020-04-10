@@ -32,7 +32,7 @@ function ExercisesList() {
           <td>{i}</td>
           <td>{exercisesByUser[i - 1].description}</td>
           <td>{exercisesByUser[i - 1].duration}</td>
-          <td>{exercisesByUser[i - 1].date}</td>
+          <td>{exercisesByUser[i - 1].date.slice(0,10)}</td>
         </tr>
       )
     }

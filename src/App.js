@@ -62,5 +62,6 @@ export default App;
  * 6.   (debugging):
  *      what are the easiest and most efficient way to debugg both client and
  *      server side
-
+ * 7.   get throw the Router components and specially the importance of Link and Switch
+ *      and generally what is a best practise of using Router
  */

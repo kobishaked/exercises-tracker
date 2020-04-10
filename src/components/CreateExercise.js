@@ -5,16 +5,17 @@ import './style/CreateExercise.css'
 import axios from 'axios'
 
 function CreateExercise() {
-    const [username, setUsername] = useState("");
+    const [username, setUsername] = useState("choose...");
     const [description, setDescription] = useState("");
     const [duration, setDuration] = useState(null);
     const [date, setDate] = useState(new Date());
     const [users, setUsers] = useState([]);
+    const [isFirstRender, setIsFirstRender] = useState(true)
 
     useEffect(async () => {
         const res = await axios.get('http://localhost:5000/users');
-        if (res.data.length > 0 ){
-            setUsers(res.data.map(user=>user.username));
+        if (res.data.length > 0) {
+            setUsers(res.data.map(user => user.username));
         }
     }, [])
 
@@ -47,13 +48,19 @@ function CreateExercise() {
                 date: date,
             }
             const res = await axios.post('http://localhost:5000/exercises/add', exercise);
+
+            setDescription("");
+            setDuration(0);
+            setDate(new Date());
+            setIsFirstRender(false);
+
         }
-        window.location = '/';
+
     }
 
 
-    
-  
+
+
 
 
 
@@ -63,7 +70,11 @@ function CreateExercise() {
                 <Form.Group>
                     <Form.Label>User Name</Form.Label>
                     <Form.Control onChange={onChangeUserName} as="select" >
-                        <option selected="true" disabled="disabled">Choose...</option>
+                        {isFirstRender
+                            ? <option selected="true" disabled="disabled">Choose...</option>
+                            : <option selected="true" >{username}</option>
+                        }
+                        {/* <option selected="true" disabled="disabled">Choose...</option> */}
                         {
                             users.map((user) => (
                                 <option key={user}>{user}</option>
@@ -74,12 +85,12 @@ function CreateExercise() {
 
                 <Form.Group>
                     <Form.Label >Description</Form.Label>
-                    <Form.Control onChange={onChangeDescription} />
+                    <Form.Control value={description} onChange={onChangeDescription} />
                 </Form.Group>
 
                 <Form.Group>
                     <Form.Label >Duration</Form.Label>
-                    <Form.Control onChange={onChangeDuration} as="input" type="number" />
+                    <Form.Control value={duration} onChange={onChangeDuration} as="input" type="number" />
                 </Form.Group>
 
                 <DatePicker

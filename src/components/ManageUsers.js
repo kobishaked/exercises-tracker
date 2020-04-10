@@ -14,11 +14,12 @@ function ManageUsers() {
     }, [])
 
     const tableGenerator = () => {
-        let exercisesWithId = [];
+        let usersWithId = [];
         for (let i = 1; i < users.length + 1; i++) {
-            exercisesWithId.push(
+            usersWithId.push(
                 <tr>
                     <td>{i}</td>
+                 
                     <td>{users[i - 1].username}</td>
                     <td>
                         {/* <button  onClick={onClickEditUser}>change name</button> */}
@@ -28,7 +29,7 @@ function ManageUsers() {
                 </tr>
             )
         }
-        return exercisesWithId;
+        return usersWithId;
     }
 
     const onClickDeleteUser = async (e) => {
@@ -49,9 +50,9 @@ function ManageUsers() {
     }
 
 
-    // const onClickEditUser = async (e) => {
-    //     const user = e.target.value;
-    // }
+    const onClickEditUser = async (e) => {
+        const user = e.target.value;
+    }
 
 
     return (
