@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-// import mongoose from 'mongoose'; 
 
 const Schema = mongoose.Schema;
 
@@ -23,10 +22,3 @@ module.exports = Exercise;
 
 
 
-/**
- * questions:
- * 1.   what are the generally differences between using import and using
- *      require and why cant i using import at this file  as showing on the 
- *      top of the file.
- *     
- */

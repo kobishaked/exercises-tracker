@@ -51,12 +51,5 @@ module.exports = router;
 
 
 
-/**
- * questions:
- * 1.   there are few ways to send data from client to server such as within the url
- *      like the params and an object. also i can send from a form within the request
- *      body. when should i use each way?
- *      what are the reasons to do that?
- * 2.   
- */
+
 

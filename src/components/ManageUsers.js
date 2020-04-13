@@ -45,7 +45,6 @@ function ManageUsers() {
         exercisesOfUser.forEach(async exercise => {
             await axios.delete(`http://localhost:5000/exercises/${exercise._id}`);
         });
-
         // setExercisesByUser([...res.data]);
     }
 
@@ -86,10 +85,10 @@ export default ManageUsers
 /**
  * questions:
  * 1.   what is the best practice to delete part of a collection?
- *      for example at the onClickDeleteUser function the pupose is to delete the
- *      user from the users collection (easy acrion) and to delete just the 
- *      exercises from the exercises collection that their username is the same
- *      user we want to delete. i did it as above. is there a better way?
+ *      for example at the onClickDeleteUser function the purpose is to delete the
+ *      user from the users collection (this is an easy action) in addition to that, we should also delete just the 
+ *      exercises from the exercises collection that their username is the same user we want to delete.
+ *      i did it as above. is there a better way?
  */
 
 

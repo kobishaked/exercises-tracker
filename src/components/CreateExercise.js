@@ -113,10 +113,3 @@ export default CreateExercise
 
 
 
-/**
- * questions:
- * 1.   get throw all the react-bootstrap tricks and to get deep understanding on
- *      how to style with scalabilty way.
- * 2.   how can i use properly the console in the chrome inspect (for example to
- *      see the content of variables) ?
- */
