@@ -17,8 +17,8 @@
     "styled-components": "^5.0.1"
   },
   "scripts": {
-    "start": "cd backend && server-install && node index.js",
-    "build": "npm run build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "client": "npm run start",
@@ -27,9 +27,7 @@
     "server-install": "cd backend && npm install",
     "install-all": "concurrently \"npm run server-install \" \"npm run client-install \"",
     "dev": "concurrently \"npm run client\" \"npm run server\" ",
-    "concurrently": "./node_modules/.bin/concurrently",
-    "heroku-postbuild": "npm run client-install"
-
+    "concurrently": "./node_modules/.bin/concurrently"
   },
   "eslintConfig": {
     "extends": "react-app"
