@@ -28,7 +28,7 @@
     "install-all": "concurrently \"npm run server-install \" \"npm run client-install \"",
     "dev": "concurrently \"npm run client\" \"npm run server\" ",
     "concurrently": "./node_modules/.bin/concurrently",
-    "heroku-postbuild": "npm run client-install && npm run build"
+    "heroku-postbuild": "npm run client-install"
 
   },
   "eslintConfig": {
