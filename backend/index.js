@@ -23,6 +23,10 @@ const exercisesRouter = require('./routes/exercises')
 app.use('/users', usersRouter);
 app.use('/exercises', exercisesRouter);
 
+if (process.env.NODE_ENV ==='production'){
+    app.use(express.static('./../build'));
+}
+
 app.listen(port, () => {
     console.log(`server is running on port ${port}`);
 });
