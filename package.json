@@ -17,7 +17,7 @@
     "styled-components": "^5.0.1"
   },
   "scripts": {
-    "start": "cd backend && node index.js",
+    "start": "cd backend && server-install && node index.js",
     "build": "npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
