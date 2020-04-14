@@ -11,8 +11,11 @@ app.use(cors());
 app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { useNewUrParser: true, useCreateIndex: true }
+const usi1 = process.env.MONGODB_URI;
+mongoose.connect(usi1 || uri, { useNewUrParser: true, useCreateIndex: true }
 );
+
+
 const connection = mongoose.connection;
 connection.once('open', () => {
     console.log("MongoGB database connection established succesfully");

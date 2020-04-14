@@ -5,7 +5,20 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "nodemon": "./node_modules/.bin/nodemon"
+    "nodemon": "./node_modules/.bin/nodemon",
+    "start": "node index.js",
+    "client-install": "cd ../ && npm install",
+    "build": "cd ../ && npm run build",
+    "heroku-postbuild": "npm run client-install && npm run build",
+
+  
+    "eject": "react-scripts eject",
+    "client": "npm run start",
+    "server": "cd backend && npm run nodemon",
+    "server-install": "cd backend && npm install",
+    "install-all": "concurrently \"npm run server-install \" \"npm run client-install \"",
+    "dev": "concurrently \"npm run client\" \"npm run server\" ",
+    "concurrently": "./node_modules/.bin/concurrently"
   },
   "author": "",
   "license": "ISC",
