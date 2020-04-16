@@ -1,0 +1,89 @@
+[33mcommit a6176c319407f8126c06d11c18f6fa85039c4a8f[m[33m ([m[1;36mHEAD[m[33m)[m
+Author: kobi <kobishaked1@gmail.com>
+Date:   Thu Apr 16 12:25:12 2020 +0300
+
+    heroku deployment finished
+
+[33mcommit 984b0c0f566844123afbe05562b5246366ad262a[m
+Author: kobi <kobishaked1@gmail.com>
+Date:   Tue Apr 14 12:45:21 2020 +0300
+
+    heroku deployment
+
+[33mcommit e61ffeea7724445a9069102dd73657028498e643[m
+Author: kobi <kobishaked1@gmail.com>
+Date:   Tue Apr 14 12:31:21 2020 +0300
+
+    heroku deployment
+
+[33mcommit f459664cb308cca06cc0266e833c3922b6296c55[m
+Author: kobi <kobishaked1@gmail.com>
+Date:   Mon Apr 13 17:43:16 2020 +0300
+
+    project finished. organized questions.
+
+[33mcommit 6d1eeecee3173c01e851c1b74105da5463bbccb5[m
+Author: kobi <kobishaked1@gmail.com>
+Date:   Mon Apr 13 17:37:37 2020 +0300
+
+    project finished. organized questions.
+
+[33mcommit d68081dcf5286bdc4771500317bcc58ec3415819[m
+Author: kobi <kobishaked1@gmail.com>
+Date:   Mon Apr 13 16:42:16 2020 +0300
+
+    project finished. waiting to deploy.
+
+[33mcommit 645535162f7dd19c663cecc2d5e09939cb5ccf69[m
+Author: kobi <kobishaked1@gmail.com>
+Date:   Mon Apr 13 13:59:23 2020 +0300
+
+    heroku deployment 3
+
+[33mcommit c602108c77a8f83148c1a9c29add655b5f6312d7[m
+Author: kobi <kobishaked1@gmail.com>
+Date:   Mon Apr 13 13:53:45 2020 +0300
+
+    heroku deployment 2
+
+[33mcommit 1ee34253d76d943cc0f722344b2aa276c6e156b2[m
+Author: kobi <kobishaked1@gmail.com>
+Date:   Mon Apr 13 13:32:02 2020 +0300
+
+    heroku deployment
+
+[33mcommit 2a8f4302bbeb6670a83cfa6319a6665317dc34d1[m
+Author: kobi <kobishaked1@gmail.com>
+Date:   Fri Apr 10 23:09:50 2020 +0300
+
+    the logical of the project completed. the style may change in the future
+
+[33mcommit bffd82452b6fd4c35032f3633c712bf5a16c3d9f[m
+Author: kobi <kobishaked1@gmail.com>
+Date:   Thu Apr 9 02:01:53 2020 +0300
+
+    fixed the deleted exercises of a specific user
+
+[33mcommit 3255ee64ece11dfc3e833f930c83d0a8ad3fc247[m
+Author: kobi <kobishaked1@gmail.com>
+Date:   Sun Apr 5 09:55:42 2020 +0300
+
+    using the git ignore in order to ignor the node_modules inside the backend folder
+
+[33mcommit c71a9212843e1bda213136bb214723f37b14dcf1[m
+Author: kobi <kobishaked1@gmail.com>
+Date:   Sun Apr 5 09:50:56 2020 +0300
+
+    node_modules in the backend deleted
+
+[33mcommit 9fef9b08b374c8fdee87035d03da415618689ba5[m
+Author: kobi <kobishaked1@gmail.com>
+Date:   Sun Apr 5 09:39:32 2020 +0300
+
+    backend finished. got supported to crud actions
+
+[33mcommit 059d0ed00c1249031de10865b8f691a1505ebd09[m
+Author: kobi <kobishaked1@gmail.com>
+Date:   Fri Apr 3 17:51:19 2020 +0300
+
+    Initialize project using Create React App

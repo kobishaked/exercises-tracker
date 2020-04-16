@@ -44,7 +44,7 @@ function ExercisesList() {
     <>
       <Form>
         <Form.Group>
-          <Form.Label>choose one of the users in the list:</Form.Label>
+          <Form.Label>choose one of the users to see his exercises:</Form.Label>
           <Form.Control onChange={onChangeUserName} as="select" >
             <option selected="true" disabled="disabled">Choose...</option>
             {
