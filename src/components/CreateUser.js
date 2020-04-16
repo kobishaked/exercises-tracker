@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { Alert, Form, Button, FormControl, Col, InputGroup } from 'react-bootstrap';
 import axios from 'axios'
 
-function CreateUser() {
+function CreateUser(props) {
     const [username, setUsername] = useState("");
     const [showUserList, setShowUserList] = useState(false);
     const [showCreateUser, setShowCreateUser] = useState(false);
+    const [alert, setAlert] = useState(false);
+    const [path, setPath] = useState(props.path)
 
     const onChangeUserName = (e) => {
         setUsername(e.target.value);
@@ -14,9 +16,13 @@ function CreateUser() {
     const onSubmitHandle = async (e) => {
         e.preventDefault();
         console.log(username)
-        const res = await axios.post('/users/add', { username });
+        const res = await axios.post(`${path}/users/add`, { username });
         console.log(res.data)
         setUsername("")
+        setAlert(true)
+        setTimeout(() => {
+            setAlert(false)
+        }, 3000);
     }
 
     return (
@@ -31,6 +37,11 @@ function CreateUser() {
                     <Button bsclass="submit-btn" variant="primary" type="submit">
                         save
                     </Button>
+                    {alert && 
+                    <Alert variant={'success'}>
+                     user added successfully! you can add another user
+                     </Alert>
+                    }
                 </Form>
             
         </>

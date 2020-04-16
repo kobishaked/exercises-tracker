@@ -8,7 +8,7 @@ import CreateExercise from './components/CreateExercise';
 import CreateUser from './components/CreateUser';
 import ManageUsers from './components/ManageUsers'
 
-
+//http://localhost:5000
 function App() {
   return (
     <div className="App">
@@ -16,11 +16,11 @@ function App() {
         <Router>
           <MyNavbar />
           <br />
-          <Route exact path="/" component={ExercisesList} />
-          <Route path="/createUser" component={CreateUser} />
-          <Route path="/manageUsers" component={ManageUsers} />
-          <Route path="/createExercise" component={CreateExercise} />
-          <Route path="/ManageExercises" component={ManageExercises} />
+          <Route exact path="/" render={() => <ExercisesList path={""}  />} />
+          <Route path="/createUser" render={() => <CreateUser path={""}  />} />
+          <Route path="/manageUsers" render={() => <ManageUsers path={""}  />} />
+          <Route path="/createExercise" render={() => <CreateExercise path={""}  />} />
+          <Route path="/ManageExercises" render={() => <ManageExercises path={""}  />} />
         </Router>
       </Container>
     </div>

@@ -4,7 +4,7 @@ import axios from 'axios'
 import './style/ManageExercises.css'
 import DatePicker from "react-datepicker";
 
-function ManageExercises() {
+function ManageExercises(props) {
     const [users, setUsers] = useState([]);
     const [exercisesByUser, setExercisesByUser] = useState([]);
     const [index, setIndex] = useState(0);
@@ -13,9 +13,10 @@ function ManageExercises() {
     const [tempDescription, setTempDescription] = useState("");
     const [tempDuration, setTempDuration] = useState(0);
     const [tempDate, setTempDate] = useState(new Date());
+    const [path, setPath] = useState(props.path)
 
     useEffect(async () => {
-        const res = await axios.get('/users');
+        const res = await axios.get(`${path}/users`);
         if (res.data.length > 0) {
             setUsers(res.data.map(user => user.username));
         }
@@ -23,7 +24,7 @@ function ManageExercises() {
 
 
     const onChangeUserName = async (e) => {
-        const res = await axios.get(`/exercises/${e.target.value}`);
+        const res = await axios.get(`${path}/exercises/${e.target.value}`);
         setExercisesByUser([...res.data]);
         setShowTable(true)
     }
@@ -56,9 +57,9 @@ function ManageExercises() {
             duration: tempDuration,
             date: tempDate,
         }
-        const res = await axios.post(`/exercises/update/${id}`, newExercise);
+        const res = await axios.post(`${path}/exercises/update/${id}`, newExercise);
         setIsTableEditable(false);
-        const res1 = await axios.get(`/exercises/${username}`);
+        const res1 = await axios.get(`${path}/exercises/${username}`);
         setExercisesByUser([...res1.data]);
     }
 
@@ -66,7 +67,7 @@ function ManageExercises() {
         const id = exercisesByUser[e.target.value]._id;
         console.log(id);
         setExercisesByUser(exercisesByUser.filter(exercise => (exercise._id !== id)))
-        await axios.delete(`/users/${id}`);
+        await axios.delete(`${path}/users/${id}`);
         // setExercisesByUser([...res.data]);
     }
 

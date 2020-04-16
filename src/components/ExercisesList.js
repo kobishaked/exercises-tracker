@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { Table, Form, Button, FormControl, Col, InputGroup } from 'react-bootstrap';
 import axios from 'axios'
 
-function ExercisesList() {
+function ExercisesList(props) {
   const [users, setUsers] = useState([]);
   const [exercisesByUser, setExercisesByUser] = useState([]);
   const [showTable, setShowTable] = useState(false)
+  const [path, setPath] = useState(props.path)
 
   useEffect(async () => {
-    const res = await axios.get('/users');
+    const res = await axios.get(`${path}/users`);
     if (res.data.length > 0) {
       setUsers(res.data.map(user => user.username));
     }
@@ -18,7 +19,7 @@ function ExercisesList() {
   const onChangeUserName = async (e) => {
     
     const user = e.target.value;
-    const res = await axios.get(`/exercises/${user}`);
+    const res = await axios.get(`${path}/exercises/${user}`);
     setExercisesByUser([...res.data]);
     setShowTable(true)
   }

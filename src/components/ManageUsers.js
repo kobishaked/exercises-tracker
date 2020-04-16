@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { Table, Form, Button, FormControl, Col, InputGroup } from 'react-bootstrap';
 import axios from 'axios'
 
-function ManageUsers() {
+function ManageUsers(props) {
     const [users, setUsers] = useState([]);
     const [showEditForm, setShowEditForm] = useState(false)
+    const [path, setPath] = useState(props.path)
 
     useEffect(async () => {
-        const res = await axios.get('/users');
+        const res = await axios.get(`${path}/users`);
         if (res.data.length > 0) {
             setUsers(res.data);
         }
@@ -22,7 +23,6 @@ function ManageUsers() {
                  
                     <td>{users[i - 1].username}</td>
                     <td>
-                        {/* <button  onClick={onClickEditUser}>change name</button> */}
                         <button value={i - 1} onClick={onClickDeleteUser}>delete user</button>
                     </td>
 
@@ -37,13 +37,13 @@ function ManageUsers() {
         const username = users[e.target.value].username;
         console.log(id);
         setUsers(users.filter(user => (user._id !== id)))
-        await axios.delete(`/users/${id}`);
-        const res = await axios.get(`/exercises/`);
+        await axios.delete(`${path}/users/${id}`);
+        const res = await axios.get(`${path}/exercises/`);
         const exercisesOfUser = res.data.filter(exercise => (
             exercise.username === username
         ))
         exercisesOfUser.forEach(async exercise => {
-            await axios.delete(`/exercises/${exercise._id}`);
+            await axios.delete(`${path}/exercises/${exercise._id}`);
         });
         // setExercisesByUser([...res.data]);
     }
