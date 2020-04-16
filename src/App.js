@@ -8,19 +8,20 @@ import CreateExercise from './components/CreateExercise';
 import CreateUser from './components/CreateUser';
 import ManageUsers from './components/ManageUsers'
 
-//http://localhost:5000
+//
 function App() {
+  const [path, setPath] = useState("")
   return (
     <div className="App">
       <Container>
         <Router>
           <MyNavbar />
           <br />
-          <Route exact path="/" render={() => <ExercisesList path={"http://localhost:5000"}  />} />
-          <Route path="/createUser" render={() => <CreateUser path={"http://localhost:5000"}  />} />
-          <Route path="/manageUsers" render={() => <ManageUsers path={"http://localhost:5000"}  />} />
-          <Route path="/createExercise" render={() => <CreateExercise path={"http://localhost:5000"}  />} />
-          <Route path="/ManageExercises" render={() => <ManageExercises path={"http://localhost:5000"}  />} />
+          <Route exact path="/" render={() => <ExercisesList path={path}  />} />
+          <Route path="/createUser" render={() => <CreateUser path={path}  />} />
+          <Route path="/manageUsers" render={() => <ManageUsers path={path}  />} />
+          <Route path="/createExercise" render={() => <CreateExercise path={path}  />} />
+          <Route path="/ManageExercises" render={() => <ManageExercises path={path}  />} />
         </Router>
       </Container>
     </div>
