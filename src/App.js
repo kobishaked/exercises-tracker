@@ -32,7 +32,7 @@ export default App;
 
 
 
-
+//1
 
 
 /**
@@ -58,8 +58,14 @@ export default App;
  * 8.  how can i use properly the console in the chrome inspect (for example to see the content of variables)?
  * 9.  get through react-bootstrap uses and tricks and to get deep understanding on how to style with scalabilty way.
  * 
+<<<<<<< HEAD
  * 
  * 
+=======
+ *
+ *
+ *
+>>>>>>> 65b1a54... heroku deployment finished
  *      **********all bellow sections are about the manage exercises menu in the app and the ManageExercises component in the code.**********
  * 
  * 1.  in the tableGenerator function after clicking the edit button of a specific row i tried to use a regular input
@@ -69,6 +75,10 @@ export default App;
  *      but at each input field i put onChange event. there is other better way to handle the 3 events?
  * 3.  any better sugestions to implement the tableGenerator functions (ManageExercises component)?
  * 4.  how to make the update of a field faster after we edit and click save?
+ * 5.   for example in the function onChangeUserName, how can i use the path of an ajax request to the server for both the local
+ *      version that should be `http://localhost:5000/exercises/${e.target.value}` and  the production version should be `/exercises/${e.target.value}`
+ *      or in other world how can i check at runtime if im in local or production?
+ *      can i use the (process.env.NODE_ENV ==='production') like in the server side?
  */
 
 
