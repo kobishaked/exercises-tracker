@@ -12,8 +12,8 @@ app.use(cors());
 app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
-const usi1 = process.env.MONGODB_URI;
-mongoose.connect(usi1 || uri, { useNewUrParser: true, useCreateIndex: true }
+const uri1 = process.env.MONGODB_URI;
+mongoose.connect(uri1 || uri, { useNewUrParser: true, useCreateIndex: true }
 );
 
 
@@ -28,7 +28,8 @@ app.use('/users', usersRouter);
 app.use('/exercises', exercisesRouter);
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../build')))
+    app.use(express.static('../build'))
+    // app.use(express.static(path.join(__dirname, '../build')))
 
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, '../build', 'index.html'))

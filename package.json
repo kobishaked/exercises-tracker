@@ -9,7 +9,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "react": "^16.13.1",
-    "react-bootstrap": "^1.0.0",
+    "react-bootstrap": "^1.0.0", 
     "react-datepicker": "^2.14.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
@@ -30,7 +30,7 @@
     "concurrently": "./node_modules/.bin/concurrently",
 
     "start-local": "react-scripts start",
-    "start": "server-install && node index.js",
+    "start": "cd backend && npm install && node index.js",
     "heroku-postbuild": "npm run client-install && npm run build"
   },
   "eslintConfig": {

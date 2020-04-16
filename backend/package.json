@@ -7,8 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "nodemon": "./node_modules/.bin/nodemon",
     "eject": "react-scripts eject"
-  
- 
   },
   "author": "",
   "license": "ISC",
@@ -22,5 +20,3 @@
     "nodemon": "^2.0.2"
   }
 }
-
-
