@@ -24,6 +24,7 @@ function ManageExercises(props) {
 
 
     const onChangeUserName = async (e) => {
+        setIsTableEditable(false);
         const res = await axios.get(`${path}/exercises/${e.target.value}`);
         setExercisesByUser([...res.data]);
         setShowTable(true)
