@@ -58,14 +58,8 @@ export default App;
  * 8.  how can i use properly the console in the chrome inspect (for example to see the content of variables)?
  * 9.  get through react-bootstrap uses and tricks and to get deep understanding on how to style with scalabilty way.
  * 
-<<<<<<< HEAD
  * 
  * 
-=======
- *
- *
- *
->>>>>>> 65b1a54... heroku deployment finished
  *      **********all bellow sections are about the manage exercises menu in the app and the ManageExercises component in the code.**********
  * 
  * 1.  in the tableGenerator function after clicking the edit button of a specific row i tried to use a regular input

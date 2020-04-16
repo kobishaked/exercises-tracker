@@ -15,7 +15,7 @@ function ManageExercises() {
     const [tempDate, setTempDate] = useState(new Date());
 
     useEffect(async () => {
-        const res = await axios.get('http://localhost:5000/users');
+        const res = await axios.get('/users');
         if (res.data.length > 0) {
             setUsers(res.data.map(user => user.username));
         }
@@ -23,7 +23,7 @@ function ManageExercises() {
 
 
     const onChangeUserName = async (e) => {
-        const res = await axios.get(`http://localhost:5000/exercises/${e.target.value}`);
+        const res = await axios.get(`/exercises/${e.target.value}`);
         setExercisesByUser([...res.data]);
         setShowTable(true)
     }
@@ -56,9 +56,9 @@ function ManageExercises() {
             duration: tempDuration,
             date: tempDate,
         }
-        const res = await axios.post(`http://localhost:5000/exercises/update/${id}`, newExercise);
+        const res = await axios.post(`/exercises/update/${id}`, newExercise);
         setIsTableEditable(false);
-        const res1 = await axios.get(`http://localhost:5000/exercises/${username}`);
+        const res1 = await axios.get(`/exercises/${username}`);
         setExercisesByUser([...res1.data]);
     }
 
@@ -66,7 +66,7 @@ function ManageExercises() {
         const id = exercisesByUser[e.target.value]._id;
         console.log(id);
         setExercisesByUser(exercisesByUser.filter(exercise => (exercise._id !== id)))
-        await axios.delete(`http://localhost:5000/users/${id}`);
+        await axios.delete(`/users/${id}`);
         // setExercisesByUser([...res.data]);
     }
 

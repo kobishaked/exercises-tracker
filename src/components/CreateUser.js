@@ -14,7 +14,7 @@ function CreateUser() {
     const onSubmitHandle = async (e) => {
         e.preventDefault();
         console.log(username)
-        const res = await axios.post('http://localhost:5000/users/add', { username });
+        const res = await axios.post('/users/add', { username });
         console.log(res.data)
         setUsername("")
     }

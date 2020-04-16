@@ -17,17 +17,21 @@
     "styled-components": "^5.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+   
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "client": "npm run start",
+    "client": "npm run start-local",
     "server": "cd backend && npm run nodemon",
     "client-install": "npm install",
     "server-install": "cd backend && npm install",
     "install-all": "concurrently \"npm run server-install \" \"npm run client-install \"",
     "dev": "concurrently \"npm run client\" \"npm run server\" ",
-    "concurrently": "./node_modules/.bin/concurrently"
+    "concurrently": "./node_modules/.bin/concurrently",
+
+    "start-local": "react-scripts start",
+    "start": "server-install && node index.js",
+    "heroku-postbuild": "npm run client-install && npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -7,7 +7,7 @@ function ManageUsers() {
     const [showEditForm, setShowEditForm] = useState(false)
 
     useEffect(async () => {
-        const res = await axios.get('http://localhost:5000/users');
+        const res = await axios.get('/users');
         if (res.data.length > 0) {
             setUsers(res.data);
         }
@@ -37,13 +37,13 @@ function ManageUsers() {
         const username = users[e.target.value].username;
         console.log(id);
         setUsers(users.filter(user => (user._id !== id)))
-        await axios.delete(`http://localhost:5000/users/${id}`);
-        const res = await axios.get(`http://localhost:5000/exercises/`);
+        await axios.delete(`/users/${id}`);
+        const res = await axios.get(`/exercises/`);
         const exercisesOfUser = res.data.filter(exercise => (
             exercise.username === username
         ))
         exercisesOfUser.forEach(async exercise => {
-            await axios.delete(`http://localhost:5000/exercises/${exercise._id}`);
+            await axios.delete(`/exercises/${exercise._id}`);
         });
         // setExercisesByUser([...res.data]);
     }

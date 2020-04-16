@@ -6,10 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "nodemon": "./node_modules/.bin/nodemon",
-    "start": "npm install && node index.js",
-    "client-install": "cd ../ && npm install",
-    "build": "cd ../ && npm run build",
-    "heroku-postbuild": "npm run client-install && npm run build",
     "eject": "react-scripts eject"
   
  

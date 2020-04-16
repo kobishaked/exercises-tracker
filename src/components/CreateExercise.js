@@ -13,7 +13,7 @@ function CreateExercise() {
     const [isFirstRender, setIsFirstRender] = useState(true)
 
     useEffect(async () => {
-        const res = await axios.get('http://localhost:5000/users');
+        const res = await axios.get('/users');
         if (res.data.length > 0) {
             setUsers(res.data.map(user => user.username));
         }
@@ -47,7 +47,7 @@ function CreateExercise() {
                 duration: duration,
                 date: date,
             }
-            const res = await axios.post('http://localhost:5000/exercises/add', exercise);
+            const res = await axios.post('/exercises/add', exercise);
 
             setDescription("");
             setDuration(0);

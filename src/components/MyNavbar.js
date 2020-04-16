@@ -29,8 +29,6 @@ export default MyNavbar
 
 
 
-<<<<<<< HEAD
-=======
 
 
 /**
@@ -118,5 +116,4 @@ export default MyNavbar
 
 
 
->>>>>>> 65b1a54... heroku deployment finished
 

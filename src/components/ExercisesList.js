@@ -8,7 +8,7 @@ function ExercisesList() {
   const [showTable, setShowTable] = useState(false)
 
   useEffect(async () => {
-    const res = await axios.get('http://localhost:5000/users');
+    const res = await axios.get('/users');
     if (res.data.length > 0) {
       setUsers(res.data.map(user => user.username));
     }
@@ -18,7 +18,7 @@ function ExercisesList() {
   const onChangeUserName = async (e) => {
     
     const user = e.target.value;
-    const res = await axios.get(`http://localhost:5000/exercises/${user}`);
+    const res = await axios.get(`/exercises/${user}`);
     setExercisesByUser([...res.data]);
     setShowTable(true)
   }
