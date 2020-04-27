@@ -6,138 +6,107 @@ import DatePicker from "react-datepicker";
 
 function ManageExercises(props) {
     const [users, setUsers] = useState([]);
+    const [choosenUser, setChoosenUser] = useState("")
     const [exercisesByUser, setExercisesByUser] = useState([]);
-    const [index, setIndex] = useState(0);
-    const [showTable, setShowTable] = useState(false);
-    const [isTableEditable, setIsTableEditable] = useState(false)
+    const [tempId, setTempId] = useState(null);
     const [tempDescription, setTempDescription] = useState("");
     const [tempDuration, setTempDuration] = useState(0);
     const [tempDate, setTempDate] = useState(new Date());
+    const [showTable, setShowTable] = useState(false);
     const [path, setPath] = useState(props.path)
 
     useEffect(async () => {
+        // if (process.env.NODE_ENV === "development") {
+        //     setPath("http://localhost:5000/")
+        // } else {
+        //     setPath("")
+        // }
         const res = await axios.get(`${path}/users`);
         if (res.data.length > 0) {
             setUsers(res.data.map(user => user.username));
         }
     }, [])
 
-
     const onChangeUserName = async (e) => {
-        setIsTableEditable(false);
+        setChoosenUser(e.target.value);
+
         const res = await axios.get(`${path}/exercises/${e.target.value}`);
         setExercisesByUser([...res.data]);
         setShowTable(true)
     }
-    const onChangeNewDuration = async (e) => {
+    const onChangeNewDuration = async (e, duration) => {
         setTempDuration(e.target.value)
     }
 
-    const onChangeNewDescription = async (e) => {
+    const onChangeNewDescription = async (e, description) => {
         setTempDescription(e.target.value);
     }
 
-    const onCahngeDate = date => {
+    const onChangeDate = date => {
         setTempDate(date);
     }
 
-    const onClickEditExercise = async (e) => {
-        setIsTableEditable(true);
-        setIndex(Number(e.target.value))
-        setTempDescription(exercisesByUser[Number(e.target.value)].description);
-        setTempDuration(exercisesByUser[Number(e.target.value)].duration)
-        setTempDate(new Date(exercisesByUser[Number(e.target.value)].date))
+    const onClickEditExercise = async (description, date, duration, id) => {
+   
+        setTempId(id);
+        setTempDescription(description);
+        setTempDuration(duration)
+        setTempDate(new Date(date))
     }
 
-    const onClickSaveNewUser = async (e) => {
-        const id = exercisesByUser[e.target.value]._id;
-        const username = exercisesByUser[e.target.value].username;
+    const onClickSaveNewUser = async (id) => {
         const newExercise = {
-            username: username,
+            username: choosenUser,
             description: tempDescription,
             duration: tempDuration,
             date: tempDate,
         }
         const res = await axios.post(`${path}/exercises/update/${id}`, newExercise);
-        setIsTableEditable(false);
-        const res1 = await axios.get(`${path}/exercises/${username}`);
+        //send the response from the post instead of the get req bellow
+     
+        const res1 = await axios.get(`${path}/exercises/${choosenUser}`);
         setExercisesByUser([...res1.data]);
+        setTempId(null);
     }
 
-    const onClickDeleteExercise = async (e) => {
-        const id = exercisesByUser[e.target.value]._id;
-        console.log(id);
+    const onClickDeleteExercise = async (id) => {
         setExercisesByUser(exercisesByUser.filter(exercise => (exercise._id !== id)))
         await axios.delete(`${path}/users/${id}`);
-        // setExercisesByUser([...res.data]);
     }
 
     const tableGenerator = () => {
-        if (isTableEditable) {
-
-            let exercisesWithIndex = [];
-            for (let i = 1; i < exercisesByUser.length + 1; i++) {
-
-                if (index === i - 1) {
-                    exercisesWithIndex.push(
-                        <tr>
-                            <td>{i}</td>
-                            <td><Form.Control bsPrefix="shorter-input" value={tempDescription} onChange={onChangeNewDescription} /></td>
-                            <td><Form.Control bsPrefix="shorter-input" value={tempDuration} onChange={onChangeNewDuration} as="input" type="number" /></td>
+        return exercisesByUser.map(({
+            description, date, duration, _id
+        }, index) => (
+                tempId === _id ? (
+                    <tr key = {_id}>
+                        <td>{index + 1}</td>
+                        <td><Form.Control bsPrefix="shorter-input" value={tempDescription} onChange={onChangeNewDescription} /></td>
+                        <td><Form.Control bsPrefix="shorter-input" value={tempDuration} onChange={onChangeNewDuration} as="input" type="number" /></td>
+                        <td>
+                            <DatePicker className='shorter-input'
+                                selected={tempDate}
+                                onChange={onChangeDate}
+                            />
+                        </td>
+                        <td>
+                            <button  onClick={()=>onClickSaveNewUser(_id)}>save</button>
+                        </td>
+                    </tr >
+                ) : (
+                        <tr key = {_id}>
+                            <td>{index + 1}</td>
+                            <td>{description}</td>
+                            <td>{duration}</td>
+                            <td>{date.slice(0, 10)}</td>
                             <td>
-
-                                <DatePicker className='shorter-input'
-                                    selected={tempDate}
-                                    onChange={onCahngeDate}
-                                />
-
-                            </td>
-                            <td>
-                                <button value={i - 1} onClick={onClickSaveNewUser}>save</button>
-                            </td>
-                        </tr >
-                    )
-                }
-
-                else {
-                    exercisesWithIndex.push(
-                        <tr>
-                            <td>{i}</td>
-                            <td>{exercisesByUser[i - 1].description}</td>
-                            <td>{exercisesByUser[i - 1].duration}</td>
-                            <td>{exercisesByUser[i - 1].date.slice(0, 10)}</td>
-                            <td>
-                                <button value={i - 1} onClick={onClickEditExercise}>edit exercise</button>
-                                <button value={i - 1} onClick={onClickDeleteExercise}>delete exercise</button>
+                                <button onClick={()=>onClickEditExercise(description, date, duration, _id)}>edit exercise</button>
+                                <button onClick={()=>onClickDeleteExercise(_id)}>delete exercise</button>
                             </td>
                         </tr>
                     )
-                }
-            }
-            return exercisesWithIndex;
-        }
-        else {
-
-            let exercisesWithIndex = [];
-            for (let i = 1; i < exercisesByUser.length + 1; i++) {
-                exercisesWithIndex.push(
-                    <tr>
-                        <td>{i}</td>
-                        <td>{exercisesByUser[i - 1].description}</td>
-                        <td>{exercisesByUser[i - 1].duration}</td>
-                        <td>{exercisesByUser[i - 1].date.slice(0, 10)}</td>
-                        <td>
-
-                            <button value={i - 1} onClick={onClickEditExercise}>edit exercise</button>
-                            <button value={i - 1} onClick={onClickDeleteExercise}>delete exercise</button>
-                        </td>
-                    </tr>
-                )
-            }
-            return exercisesWithIndex;
-        }
+            ));
     }
-
 
 
 
@@ -176,6 +145,7 @@ function ManageExercises(props) {
 
         </>
     )
+
 }
 
 export default ManageExercises
