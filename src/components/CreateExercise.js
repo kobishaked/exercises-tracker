@@ -15,9 +15,6 @@ function CreateExercise(props) {
     const [path, setPath] = useState(props.path)
 
     
-    
- 
-
     useEffect(async () => {
         // if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
         //     setPath("http://localhost:5000")
@@ -70,14 +67,6 @@ function CreateExercise(props) {
         }
 
     }
-
-
-
-  
-    
-        
-    
-
 
 
     return (

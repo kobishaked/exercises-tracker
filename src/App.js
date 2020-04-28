@@ -10,7 +10,7 @@ import ManageUsers from './components/ManageUsers'
 
 //
 function App() {
-  const [path, setPath] = useState("http://localhost:5000")
+  const [path, setPath] = useState("")
   console.log('debug server path: ', process.env.NODE_ENV);
   return (
     <div className="App">
