@@ -6,23 +6,28 @@
     margin: none;
 }
 
-.td-description{
+.td-description-manage-exercises{
   width: 35%;
   padding: none;
   margin: none;
 }
 
   
-.td-duration{
+.td-duration-manage-exercises{
   width: 10%;
   padding: none;
   margin: none;
 }
 
-.td-date{
+.td-date-manage-exercises{
   width: 15%;
   padding: none;
   margin: none;
 }
+
+.btn-margin{
+  margin: 3px;
+}
+
 
   

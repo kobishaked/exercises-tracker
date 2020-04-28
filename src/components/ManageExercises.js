@@ -47,7 +47,7 @@ function ManageExercises(props) {
     }
 
     const onClickEditExercise = async (description, date, duration, id) => {
-   
+
         setTempId(id);
         setTempDescription(description);
         setTempDuration(duration)
@@ -63,7 +63,6 @@ function ManageExercises(props) {
         }
         const res = await axios.post(`${path}/exercises/update/${id}`, newExercise);
         //send the response from the post instead of the get req bellow
-     
         const res1 = await axios.get(`${path}/exercises/${choosenUser}`);
         setExercisesByUser([...res1.data]);
         setTempId(null);
@@ -79,36 +78,34 @@ function ManageExercises(props) {
             description, date, duration, _id
         }, index) => (
                 tempId === _id ? (
-                    <tr key = {_id}>
+                    <tr key={_id}>
                         <td>{index + 1}</td>
-                        <td className="td-description"><input className="shorter-input" value={tempDescription} onChange={onChangeNewDescription} /></td>
-                        <td className="td-duration"><input className="shorter-input" value={tempDuration} onChange={onChangeNewDuration} as="input" type="number" /></td>
-                        <td className="td-date
-">
+                        <td ><input className="shorter-input" value={tempDescription} onChange={onChangeNewDescription} /></td>
+                        <td ><input className="shorter-input" value={tempDuration} onChange={onChangeNewDuration} as="input" type="number" /></td>
+                        <td >
                             <DatePicker className='shorter-input'
                                 selected={tempDate}
                                 onChange={onChangeDate}
                             />
                         </td>
                         <td>
-                            <button  onClick={()=>onClickSaveNewUser(_id)}>save</button>
+                            <button onClick={() => onClickSaveNewUser(_id)}>save</button>
                         </td>
                     </tr >
                 ) : (
-                        <tr key = {_id}>
+                        <tr key={_id}>
                             <td>{index + 1}</td>
-                            <td className="td-description">{description}</td>
-                            <td className="td-duration">{duration}</td>
-                            <td className="td-date">{date.slice(0, 10)}</td>
-                            <td>
-                                <button onClick={()=>onClickEditExercise(description, date, duration, _id)}>edit exercise</button>
-                                <button onClick={()=>onClickDeleteExercise(_id)}>delete exercise</button>
+                            <td className="td-description-manage-exercises">{description}</td>
+                            <td className="td-duration-manage-exercises">{duration}</td>
+                            <td className="td-date-manage-exercises">{date.slice(0, 10)}</td>
+                            <td className="btn-margin">
+                                <button className="btn-margin" onClick={() => onClickEditExercise(description, date, duration, _id)}>edit exercise</button>
+                                <button className="btn-margin" onClick={() => onClickDeleteExercise(_id)}>delete exercise</button>
                             </td>
                         </tr>
                     )
             ));
     }
-
 
     return (
         <>
@@ -134,7 +131,6 @@ function ManageExercises(props) {
                             <th>Duration</th>
                             <th>Date</th>
                             <th>Actions</th>
-
                         </tr>
                     </thead>
                     <tbody>

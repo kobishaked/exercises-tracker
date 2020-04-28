@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Table, Form, Button, FormControl, Col, InputGroup } from 'react-bootstrap';
 import axios from 'axios'
+import './style/ManageUsers.css'
 
 function ManageUsers(props) {
     const [users, setUsers] = useState([]);
@@ -15,27 +16,18 @@ function ManageUsers(props) {
     }, [])
 
     const tableGenerator = () => {
-        let usersWithId = [];
-        for (let i = 1; i < users.length + 1; i++) {
-            usersWithId.push(
-                <tr>
-                    <td>{i}</td>
-                 
-                    <td>{users[i - 1].username}</td>
-                    <td>
-                        <button value={i - 1} onClick={onClickDeleteUser}>delete user</button>
-                    </td>
+        return users.map(({
+          username, _id
+        }, index) => (
+            <tr key={_id}>
+              <td >{index + 1}</td>
+              <td className="td-description-list">{username}</td>
+              <td className="td-duration-list"><button onClick={(e)=>onClickDeleteUser(e, username, _id)}>delete user</button></td>
+            </tr>
+          ))
+      }
 
-                </tr>
-            )
-        }
-        return usersWithId;
-    }
-
-    const onClickDeleteUser = async (e) => {
-        const id = users[e.target.value]._id;
-        const username = users[e.target.value].username;
-        console.log(id);
+    const onClickDeleteUser = async (e, username, id) => {
         setUsers(users.filter(user => (user._id !== id)))
         await axios.delete(`${path}/users/${id}`);
         const res = await axios.get(`${path}/exercises/`);
@@ -45,41 +37,29 @@ function ManageUsers(props) {
         exercisesOfUser.forEach(async exercise => {
             await axios.delete(`${path}/exercises/${exercise._id}`);
         });
-        // setExercisesByUser([...res.data]);
     }
-
-
-    const onClickEditUser = async (e) => {
-        const user = e.target.value;
-    }
-
 
     return (
         <>
-    
-
-            <Table striped bordered hover responsive>
+            <Form.Label>see all the users in the system. <br></br>
+            <b>notice</b> - if you delete on of the users, all his exercises will deleted as well!</Form.Label>
+            <Table size="sm" className="short-table-manage-users" striped bordered hover responsive>
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>User Name</th>
-                        <th>Actions</th>
-
+                        <th className="td-username-manage-users">User Name</th>
+                        <th className="td-action-manage-users">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {tableGenerator()}
                 </tbody>
             </Table>
-
-
         </>
     )
 }
 
 export default ManageUsers
-
-
 
 
 /**

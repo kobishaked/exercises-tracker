@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Table, Form, Button, FormControl, Col, InputGroup } from 'react-bootstrap';
 import axios from 'axios'
+import './style/ExercisesList.css'
 
 function ExercisesList(props) {
   const [users, setUsers] = useState([]);
@@ -17,29 +18,25 @@ function ExercisesList(props) {
 
 
   const onChangeUserName = async (e) => {
-    
+
     const user = e.target.value;
     const res = await axios.get(`${path}/exercises/${user}`);
     setExercisesByUser([...res.data]);
     setShowTable(true)
   }
 
-
   const tableGenerator = () => {
-    let exercisesWithIndex = [];
-    for (let i = 1; i < exercisesByUser.length + 1; i++) {
-      exercisesWithIndex.push(
-        <tr>
-          <td>{i}</td>
-          <td>{exercisesByUser[i - 1].description}</td>
-          <td>{exercisesByUser[i - 1].duration}</td>
-          <td>{exercisesByUser[i - 1].date.slice(0,10)}</td>
+    return exercisesByUser.map(({
+      description, date, duration, _id
+    }, index) => (
+        <tr key={_id}>
+          <td >{index + 1}</td>
+          <td className="td-description-list">{description}</td>
+          <td className="td-duration-list">{duration}</td>
+          <td className="td-date-list">{date.slice(0, 10)}</td>
         </tr>
-      )
-    }
-    return exercisesWithIndex;
+      ))
   }
-
 
   return (
     <>
@@ -57,24 +54,24 @@ function ExercisesList(props) {
         </Form.Group>
       </Form>
       {showTable && (
-        <Table striped bordered hover responsive>
-          <thead>
-            <tr>
+        <Table size="sm" className="short-table-list" striped bordered hover responsive>
+          <thead >
+            <tr >
               <th>#</th>
-              <th>Description</th>
-              <th>Duration</th>
-              <th>Date</th>
+              <th >Description</th>
+              <th >Duration</th>
+              <th >Date</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody >
             {tableGenerator()}
           </tbody>
         </Table>
       )}
-
     </>
   )
 }
+
 export default ExercisesList
 
 

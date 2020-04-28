@@ -1,0 +1,21 @@
+.short-table-list{
+    width: 65%;
+  }
+  
+  .td-description-list{
+    width: 60%;
+    padding: none;
+    margin: none;
+  }
+    
+  .td-duration-list{
+    width: 15%;
+    padding: none;
+    margin: none;
+  }
+  
+  .td-date-list{
+    width: 25%;
+    padding: none;
+    margin: none;
+  }
