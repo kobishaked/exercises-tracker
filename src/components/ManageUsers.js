@@ -21,8 +21,8 @@ function ManageUsers(props) {
         }, index) => (
             <tr key={_id}>
               <td >{index + 1}</td>
-              <td className="td-description-list">{username}</td>
-              <td className="td-duration-list"><button onClick={(e)=>onClickDeleteUser(e, username, _id)}>delete user</button></td>
+              <td className="td-username-manage-users">{username}</td>
+              <td className="td-action-manage-users"><button className="btn-size" onClick={(e)=>onClickDeleteUser(e, username, _id)}>delete user</button></td>
             </tr>
           ))
       }

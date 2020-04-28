@@ -1,16 +1,22 @@
 .short-table-manage-users{
-    width: 65%;
+    width: 30%;
   }
   
   .td-username-manage-users{
-    width: 70%;
+    width: 60%;
     padding: none;
     margin: none;
   }
     
   .td-action-manage-users{
-    width: 25%;
+    width: 35%;
     padding: none;
     margin: none;
   }
+
+  .btn-size{
+      font-size: 13px;
+      
+  }
+  
   
