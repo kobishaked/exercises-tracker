@@ -81,9 +81,10 @@ function ManageExercises(props) {
                 tempId === _id ? (
                     <tr key = {_id}>
                         <td>{index + 1}</td>
-                        <td><Form.Control bsPrefix="shorter-input" value={tempDescription} onChange={onChangeNewDescription} /></td>
-                        <td><Form.Control bsPrefix="shorter-input" value={tempDuration} onChange={onChangeNewDuration} as="input" type="number" /></td>
-                        <td>
+                        <td className="td-description"><input className="shorter-input" value={tempDescription} onChange={onChangeNewDescription} /></td>
+                        <td className="td-duration"><input className="shorter-input" value={tempDuration} onChange={onChangeNewDuration} as="input" type="number" /></td>
+                        <td className="td-date
+">
                             <DatePicker className='shorter-input'
                                 selected={tempDate}
                                 onChange={onChangeDate}
@@ -96,9 +97,9 @@ function ManageExercises(props) {
                 ) : (
                         <tr key = {_id}>
                             <td>{index + 1}</td>
-                            <td>{description}</td>
-                            <td>{duration}</td>
-                            <td>{date.slice(0, 10)}</td>
+                            <td className="td-description">{description}</td>
+                            <td className="td-duration">{duration}</td>
+                            <td className="td-date">{date.slice(0, 10)}</td>
                             <td>
                                 <button onClick={()=>onClickEditExercise(description, date, duration, _id)}>edit exercise</button>
                                 <button onClick={()=>onClickDeleteExercise(_id)}>delete exercise</button>
@@ -107,7 +108,6 @@ function ManageExercises(props) {
                     )
             ));
     }
-
 
 
     return (
@@ -126,7 +126,7 @@ function ManageExercises(props) {
                 </Form.Group>
             </Form>
             {showTable && (
-                <Table striped bordered hover responsive>
+                <Table size="sm" striped bordered hover responsive>
                     <thead>
                         <tr>
                             <th>#</th>

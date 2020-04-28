@@ -1,5 +1,28 @@
+
+
 .shorter-input{
-    width: 100px;
-    padding-right: 0;
-    margin-right: 0;
-  }
+    width: 100%;
+    padding: none;
+    margin: none;
+}
+
+.td-description{
+  width: 35%;
+  padding: none;
+  margin: none;
+}
+
+  
+.td-duration{
+  width: 10%;
+  padding: none;
+  margin: none;
+}
+
+.td-date{
+  width: 15%;
+  padding: none;
+  margin: none;
+}
+
+  
