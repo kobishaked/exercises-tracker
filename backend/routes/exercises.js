@@ -27,13 +27,12 @@ router.post('/add', async (req, res) => {
     catch (error) {
         res.status(400).json('Error: ' + error);
     }
-
 })
 
 router.get('/:username', async (req, res) => {
     try {
-        const exersice = await Exersice.find({username: `${req.params.username}`} );
-        res.json(exersice);
+        const exersices = await Exersice.find({username: `${req.params.username}`} );
+        res.json(exersices);
     }
     catch (error) {
         res.status(400).json('Error: ' + error);
@@ -50,20 +49,21 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
-router.post('/update/:id', async (req, res) => {
+router.put('/update/:id', async (req, res) => {
     try {
-        const exersice = await Exersice.findByIdAndUpdate(req.params.id);
-        exersice.username = req.body.username;
-        exersice.description = req.body.description;
-        exersice.duration = Number(req.body.duration);
-        exersice.date = Date.parse(req.body.date);
-        exersice.save()
-        res.json("exersice updated");
+        const oldExersice = await Exersice.findByIdAndUpdate(req.params.id);
+        oldExersice.description = req.body.description;
+        oldExersice.duration = Number(req.body.duration);
+        oldExersice.date = Date.parse(req.body.date);
+        await oldExersice.save()
+        const UpdatedExercisesByUser = await Exersice.find({username: `${req.body.username}`} );
+        res.json(UpdatedExercisesByUser);
     }
     catch (error) {
         res.status(400).json('Error: ' + error);
     }
 })
+
 
 
 module.exports = router;

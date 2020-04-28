@@ -54,17 +54,15 @@ function ManageExercises(props) {
         setTempDate(new Date(date))
     }
 
-    const onClickSaveNewUser = async (id) => {
+    const onClickSaveNewExercise = async (id) => {
         const newExercise = {
             username: choosenUser,
             description: tempDescription,
             duration: tempDuration,
             date: tempDate,
         }
-        const res = await axios.post(`${path}/exercises/update/${id}`, newExercise);
-        //send the response from the post instead of the get req bellow
-        const res1 = await axios.get(`${path}/exercises/${choosenUser}`);
-        setExercisesByUser([...res1.data]);
+        const res = await axios.put(`${path}/exercises/update/${id}`, newExercise);
+        setExercisesByUser([...res.data]);
         setTempId(null);
     }
 
@@ -89,7 +87,7 @@ function ManageExercises(props) {
                             />
                         </td>
                         <td>
-                            <button onClick={() => onClickSaveNewUser(_id)}>save</button>
+                            <button onClick={() => onClickSaveNewExercise(_id)}>save</button>
                         </td>
                     </tr >
                 ) : (
