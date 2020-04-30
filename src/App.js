@@ -7,8 +7,9 @@ import ManageExercises from './components/ManageExercises';
 import CreateExercise from './components/CreateExercise';
 import CreateUser from './components/CreateUser';
 import ManageUsers from './components/ManageUsers'
+import './App.css'
 
-//
+//http://localhost:5000
 function App() {
   const [path, setPath] = useState("")
   console.log('debug server path: ', process.env.NODE_ENV);
@@ -33,8 +34,6 @@ export default App;
 
 
 
-
-//123
 
 
 /**

@@ -3,6 +3,7 @@ import { Table, Form, Button, FormControl, Col, InputGroup } from 'react-bootstr
 import axios from 'axios'
 import './style/ManageExercises.css'
 import DatePicker from "react-datepicker";
+const moment = require('moment');
 
 function ManageExercises(props) {
     const [users, setUsers] = useState([]);
@@ -81,6 +82,7 @@ function ManageExercises(props) {
                         <td ><input className="shorter-input" value={tempDuration} onChange={onChangeNewDuration} as="input" type="number" /></td>
                         <td >
                             <DatePicker className='shorter-input'
+                                dateFormat="dd/MM/yyyy"
                                 selected={tempDate}
                                 onChange={onChangeDate}
                             />
@@ -94,7 +96,7 @@ function ManageExercises(props) {
                             <td>{index + 1}</td>
                             <td className="td-description-manage-exercises">{description}</td>
                             <td className="td-duration-manage-exercises">{duration}</td>
-                            <td className="td-date-manage-exercises">{date.slice(0, 10)}</td>
+                            <td className="td-date-manage-exercises">{moment(date.toString()).format("DD/MM/YYYY")}</td>
                             <td className="btn-margin">
                                 <button className="btn-margin" onClick={() => onClickEditExercise(description, date, duration, _id)}>edit exercise</button>
                                 <button className="btn-margin" onClick={() => onClickDeleteExercise(_id)}>delete exercise</button>
@@ -104,12 +106,14 @@ function ManageExercises(props) {
             ));
     }
 
+
+
     return (
         <>
             <Form>
                 <Form.Group>
                     <Form.Label>choose one of the users in the list:</Form.Label>
-                    <Form.Control onChange={onChangeUserName} as="select" >
+                    <Form.Control className="input" onChange={onChangeUserName} as="select" >
                         <option selected={true} disabled="disabled">Choose...</option>
                         {
                             users.map((user) => (

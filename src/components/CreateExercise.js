@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Form, Button, FormControl, Col, InputGroup, Alert} from 'react-bootstrap';
+import { Form, Button, FormControl, Col, InputGroup, Alert } from 'react-bootstrap';
 import DatePicker from "react-datepicker";
 import './style/CreateExercise.css'
 import axios from 'axios'
+const moment = require('moment');
 
 function CreateExercise(props) {
     const [username, setUsername] = useState("choose...");
@@ -14,7 +15,7 @@ function CreateExercise(props) {
     const [alert, setAlert] = useState(false);
     const [path, setPath] = useState(props.path)
 
-    
+
     useEffect(async () => {
         // if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
         //     setPath("http://localhost:5000")
@@ -55,7 +56,10 @@ function CreateExercise(props) {
             }
             const res = await axios.post(`${path}/exercises/add`, exercise);
             setDescription("");
-            setDuration(0);
+            setDuration("");
+
+            
+
             setDate(new Date());
             setIsFirstRender(false);
             setAlert(true)
@@ -68,11 +72,13 @@ function CreateExercise(props) {
 
     }
 
+   
+
 
     return (
         <>
-            <Form onSubmit={onSubmitHandle}>
-                <Form.Group>
+            <Form className="input" onSubmit={onSubmitHandle}>
+                <Form.Group >
                     <Form.Label>User Name</Form.Label>
                     <Form.Control onChange={onChangeUserName} as="select" >
                         {isFirstRender
@@ -89,28 +95,33 @@ function CreateExercise(props) {
                 </Form.Group>
 
                 <Form.Group>
-                    <Form.Label >Description</Form.Label>
+                    <Form.Label >Exercise name</Form.Label>
                     <Form.Control value={description} onChange={onChangeDescription} />
                 </Form.Group>
 
                 <Form.Group>
-                    <Form.Label >Duration</Form.Label>
+                    <Form.Label >How long did it take? <br></br> (in minutes)</Form.Label>
                     <Form.Control value={duration} onChange={onChangeDuration} as="input" type="number" />
                 </Form.Group>
 
-                <DatePicker
-                    selected={date}
-                    onChange={onCahngeDate}
-                />
+                <Form.Group>
+                    <Form.Label > What date did you do the exercise?</Form.Label>
+                    <br />
+                    <DatePicker
+                        dateFormat="dd/MM/yyyy"
+                        selected={date}
+                        onChange={onCahngeDate}
+                    />
+                </Form.Group>
 
                 <br />
 
                 <Button bsclass="submit-btn" variant="primary" type="submit">
                     create an exercise
                 </Button>
-                {alert && 
-                <Alert variant={'success'}>
-                exercise added successfully! you can add another exercise
+                {alert &&
+                    <Alert variant={'success'}>
+                        exercise added successfully! you can add another exercise
                 </Alert>
                 }
             </Form>

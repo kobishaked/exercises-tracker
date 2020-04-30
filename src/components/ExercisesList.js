@@ -43,7 +43,7 @@ function ExercisesList(props) {
       <Form>
         <Form.Group>
           <Form.Label>choose one of the users to see his exercises:</Form.Label>
-          <Form.Control onChange={onChangeUserName} as="select" >
+          <Form.Control className="input"  onChange={onChangeUserName} as="select" >
             <option selected="true" disabled="disabled">Choose...</option>
             {
               users.map((user) => (

@@ -32,7 +32,7 @@ function CreateUser(props) {
                 <Form onSubmit={onSubmitHandle} >
                     <Form.Group>
                         <Form.Label>User Name</Form.Label>
-                        <Form.Control onChange={onChangeUserName} value={username} />
+                        <Form.Control className="input" onChange={onChangeUserName} value={username} />
                     </Form.Group>
                     <Button bsclass="submit-btn" variant="primary" type="submit">
                         save
