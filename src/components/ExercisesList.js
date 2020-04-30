@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Table, Form, Button, FormControl, Col, InputGroup } from 'react-bootstrap';
 import axios from 'axios'
 import './style/ExercisesList.css'
+const moment = require('moment');
 
 function ExercisesList(props) {
   const [users, setUsers] = useState([]);
@@ -33,7 +34,7 @@ function ExercisesList(props) {
           <td >{index + 1}</td>
           <td className="td-description-list">{description}</td>
           <td className="td-duration-list">{duration}</td>
-          <td className="td-date-list">{date.slice(0, 10)}</td>
+          <td className="td-date-list">{moment(date.toString()).format("DD/MM/YYYY")}</td>
         </tr>
       ))
   }
@@ -43,7 +44,7 @@ function ExercisesList(props) {
       <Form>
         <Form.Group>
           <Form.Label>choose one of the users to see his exercises:</Form.Label>
-          <Form.Control className="input"  onChange={onChangeUserName} as="select" >
+          <Form.Control className="input" onChange={onChangeUserName} as="select" >
             <option selected="true" disabled="disabled">Choose...</option>
             {
               users.map((user) => (
