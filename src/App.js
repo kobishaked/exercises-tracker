@@ -11,7 +11,7 @@ import './App.css'
 
 //http://localhost:5000
 function App() {
-  const [path, setPath] = useState("")
+  const [path, setPath] = useState("http://localhost:5000")
   console.log('debug server path: ', process.env.NODE_ENV);
   return (
     <div className="App">

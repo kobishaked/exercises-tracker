@@ -14,19 +14,49 @@ function ManageExercises(props) {
     const [tempDuration, setTempDuration] = useState(0);
     const [tempDate, setTempDate] = useState(new Date());
     const [showTable, setShowTable] = useState(false);
-    const [path, setPath] = useState(props.path)
+    const [path, setPath] = useState(null)
 
-    useEffect(async () => {
-        // if (process.env.NODE_ENV === "development") {
-        //     setPath("http://localhost:5000/")
-        // } else {
-        //     setPath("")
-        // }
-        const res = await axios.get(`${path}/users`);
-        if (res.data.length > 0) {
-            setUsers(res.data.map(user => user.username));
+
+
+    
+    // useEffect(async () => {
+    //     if (process.env.NODE_ENV === "development") {
+    //         setPath("http://localhost:5000/")
+    //     } else {
+    //         setPath("")
+    //     }
+    //     const res = await axios.get(`${path}/users`);
+    //     if (res.data.length > 0) {
+    //         setUsers(res.data.map(user => user.username));
+    //     }
+    // }, [])
+
+
+
+
+
+
+    useEffect(() => {
+        if (process.env.NODE_ENV === "development") {
+            setPath("http://localhost:5000")
+        }
+        else {
+            setPath("")
         }
     }, [])
+
+    useEffect(() => {
+        async function fetchUsers() {
+            const res = await axios.get(`${path}/users`);
+            if (res.data.length > 0) {
+                setUsers(res.data.map(user => user.username));
+            }
+        }
+        fetchUsers()
+    }, [path])
+
+
+
 
     const onChangeUserName = async (e) => {
         setChoosenUser(e.target.value);
@@ -129,7 +159,7 @@ function ManageExercises(props) {
                         <tr>
                             <th>#</th>
                             <th>Description</th>
-                            <th>Duration</th>
+                            <th>Duration </th>
                             <th>Date</th>
                             <th>Actions</th>
                         </tr>

@@ -60,7 +60,7 @@ function ExercisesList(props) {
             <tr >
               <th>#</th>
               <th >Description</th>
-              <th >Duration</th>
+              <th >Duration </th>
               <th >Date</th>
             </tr>
           </thead>
