@@ -1,28 +1,24 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Table, Form, Button, FormControl, Col, InputGroup } from 'react-bootstrap';
+import { Table, Form } from 'react-bootstrap';
 import axios from 'axios'
 import './style/ExercisesList.css'
 import PathContext from '../contexts/PathContext'
 const moment = require('moment');
 
-
-function ExercisesList(props) {
+function ExercisesList() {
   const [users, setUsers] = useState([]);
   const [exercisesByUser, setExercisesByUser] = useState([]);
   const [showTable, setShowTable] = useState(false)
-  // const [path, setPath] = useState(props.path)
   const path = useContext(PathContext);
 
-  useEffect(async () => {
-    const res = await axios.get(`${path}/users`);
-    if (res.data.length > 0) {
-      setUsers(res.data.map(user => user.username));
-    }
-  }, [])
-
+  useEffect(() => {
+    (async () => {
+        const res = await axios.get(`${path}/users`);
+        res.data.length > 0 && setUsers(res.data.map(user => user.username));
+    })()
+}, [])
 
   const onChangeUserName = async (e) => {
-
     const user = e.target.value;
     const res = await axios.get(`${path}/exercises/${user}`);
     setExercisesByUser([...res.data]);

@@ -2,13 +2,12 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Alert, Form, Button, FormControl, Col, InputGroup } from 'react-bootstrap';
 import axios from 'axios'
 import PathContext from '../contexts/PathContext'
+import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from 'react-toastify'
 
-function CreateUser(props) {
+function CreateUser() {
     const [username, setUsername] = useState("");
-    const [showUserList, setShowUserList] = useState(false);
-    const [showCreateUser, setShowCreateUser] = useState(false);
     const [alert, setAlert] = useState(false);
-    // const [path, setPath] = useState(props.path)
     const path = useContext(PathContext)
 
     const onChangeUserName = (e) => {
@@ -18,34 +17,36 @@ function CreateUser(props) {
     const onSubmitHandle = async (e) => {
         e.preventDefault();
         console.log(username)
+        try{
         const res = await axios.post(`${path}/users/add`, { username });
-        console.log(res.data)
+        toast.success("user added successfully! you can add another user")
+        }
+        catch(e){
+            toast.error("please insert a name with at least 3 characters")
+        }
         setUsername("")
         setAlert(true)
-        setTimeout(() => {
-            setAlert(false)
-        }, 3000);
     }
 
     return (
         <>
-
-           
-                <Form onSubmit={onSubmitHandle} >
-                    <Form.Group>
-                        <Form.Label>User Name</Form.Label>
-                        <Form.Control className="input" onChange={onChangeUserName} value={username} />
-                    </Form.Group>
-                    <Button bsclass="submit-btn" variant="primary" type="submit">
-                        save
+            <Form onSubmit={onSubmitHandle} >
+                <Form.Group>
+                    <Form.Label>User Name (with at least 3 character)</Form.Label>
+                    <Form.Control className="input" onChange={onChangeUserName} value={username} />
+                </Form.Group>
+                <Button bsclass="submit-btn" variant="primary" type="submit">
+                    save
                     </Button>
-                    {alert && 
-                    <Alert variant={'success'}>
-                     user added successfully! you can add another user
-                     </Alert>
-                    }
-                </Form>
-            
+                {alert &&
+                    <ToastContainer
+                        className="alert"
+                        autoClose={4000}
+                        position={toast.POSITION.BOTTOM_CENTER}
+                    />
+                }
+            </Form>
+
         </>
     )
 }

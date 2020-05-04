@@ -4,11 +4,16 @@ import DatePicker from "react-datepicker";
 import './style/CreateExercise.css'
 import axios from 'axios'
 import PathContext from '../contexts/PathContext'
+import 'react-toastify/dist/ReactToastify.css';
+
+import { toast, ToastContainer } from 'react-toastify'
+
+
 const moment = require('moment');
 
 
 
-function CreateExercise(props) {
+function CreateExercise() {
     const [username, setUsername] = useState("choose...");
     const [description, setDescription] = useState("");
     const [duration, setDuration] = useState(null);
@@ -16,18 +21,13 @@ function CreateExercise(props) {
     const [users, setUsers] = useState([]);
     const [isFirstRender, setIsFirstRender] = useState(true)
     const [alert, setAlert] = useState(false);
-    // const [path, setPath] = useState(props.path)
     const path = useContext(PathContext);
-    
 
-    useEffect(async () => {
-        // if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-        //     setPath("http://localhost:5000")
-        // }
-        const res = await axios.get(`${path}/users`);
-        if (res.data.length > 0) {
-            setUsers(res.data.map(user => user.username));
-        }
+    useEffect(() => {
+        (async () => {
+            const res = await axios.get(`${path}/users`);
+            res.data.length > 0 && setUsers(res.data.map(user => user.username));
+        })()
     }, [])
 
     const onChangeUserName = (e) => {
@@ -48,8 +48,9 @@ function CreateExercise(props) {
 
     const onSubmitHandle = async (e) => {
         e.preventDefault();
-        if (username === "") {
-            console.log("please choose one of the usernames.");
+        if (username === "choose...") {
+            setAlert(true)
+            toast.warning("please choose one of the usernames.")
         }
         else {
             const exercise = {
@@ -62,22 +63,17 @@ function CreateExercise(props) {
             setDescription("");
             setDuration("");
 
-            
-
             setDate(new Date());
             setIsFirstRender(false);
             setAlert(true)
-            setTimeout(() => {
-                setAlert(false)
-            }, 4000);
-
-
+            toast.success("exercise added successfully! you can add another exercise")
         }
 
+
+
+
+
     }
-
-   
-
 
     return (
         <>
@@ -124,9 +120,11 @@ function CreateExercise(props) {
                     create an exercise
                 </Button>
                 {alert &&
-                    <Alert variant={'success'}>
-                        exercise added successfully! you can add another exercise
-                </Alert>
+                    <ToastContainer
+                        className="alert"
+                        autoClose={4000}
+                        position={toast.POSITION.BOTTOM_CENTER}
+                    />
                 }
             </Form>
         </>
@@ -134,7 +132,3 @@ function CreateExercise(props) {
 }
 
 export default CreateExercise
-
-
-
-

@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Table, Form, Button, FormControl, Col, InputGroup } from 'react-bootstrap';
+import { Table, Form } from 'react-bootstrap';
 import axios from 'axios'
 import './style/ManageExercises.css'
 import DatePicker from "react-datepicker";
 import PathContext from '../contexts/PathContext'
 const moment = require('moment');
 
-
-function ManageExercises(props) {
+function ManageExercises() {
     const [users, setUsers] = useState([]);
     const [choosenUser, setChoosenUser] = useState("")
     const [exercisesByUser, setExercisesByUser] = useState([]);
@@ -16,45 +15,14 @@ function ManageExercises(props) {
     const [tempDuration, setTempDuration] = useState(0);
     const [tempDate, setTempDate] = useState(new Date());
     const [showTable, setShowTable] = useState(false);
-    // const [path, setPath] = useState(null)
-
     const path = useContext(PathContext);
 
-
-    
-    useEffect(async () => {
-        const res = await axios.get(`${path}/users`);
-        if (res.data.length > 0) {
-            setUsers(res.data.map(user => user.username));
-        }
+    useEffect(() => {
+        (async () => {
+            const res = await axios.get(`${path}/users`);
+            res.data.length > 0 && setUsers(res.data.map(user => user.username));
+        })()
     }, [])
-
-
-
-
-
-
-    // useEffect(() => {
-    //     let path = process.env.NODE_ENV === "development" ? "http://localhost:5000" : "";
-    //     // if (process.env.NODE_ENV === "development") {
-    //     //     path = "http://localhost:5000";
-    //     // }
-    //     // else {
-    //     //     path = "";
-    //     // }
-    //     (async function fetchUsers() {
-    //         const res = await axios.get(`${path}/users`);
-    //         res.data.length > 0 && setUsers(res.data.map(user => user.username));
-    //         // if (res.data.length > 0) {
-    //         //     setUsers(res.data.map(user => user.username));
-    //         // }
-    //     })();
-    //     // fetchUsers()
-    //     setPath(path);
-    // }, [])
-
-
-
 
     const onChangeUserName = async (e) => {
         setChoosenUser(e.target.value);
@@ -134,8 +102,6 @@ function ManageExercises(props) {
             ));
     }
 
-
-
     return (
         <>
             <Form>
@@ -167,10 +133,8 @@ function ManageExercises(props) {
                     </tbody>
                 </Table>
             )}
-
         </>
     )
-
 }
 
 export default ManageExercises

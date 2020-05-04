@@ -29,8 +29,6 @@ export default MyNavbar
 
 
 
-
-
 /**
  * questions:
  * 1.   why if i use the  <Link> component from react-router-dom, 
