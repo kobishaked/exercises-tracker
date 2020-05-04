@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Alert, Form, Button, FormControl, Col, InputGroup } from 'react-bootstrap';
 import axios from 'axios'
+import PathContext from '../contexts/PathContext'
 
 function CreateUser(props) {
     const [username, setUsername] = useState("");
     const [showUserList, setShowUserList] = useState(false);
     const [showCreateUser, setShowCreateUser] = useState(false);
     const [alert, setAlert] = useState(false);
-    const [path, setPath] = useState(props.path)
+    // const [path, setPath] = useState(props.path)
+    const path = useContext(PathContext)
 
     const onChangeUserName = (e) => {
         setUsername(e.target.value);

@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Form, Button, FormControl, Col, InputGroup, Alert } from 'react-bootstrap';
 import DatePicker from "react-datepicker";
 import './style/CreateExercise.css'
 import axios from 'axios'
+import PathContext from '../contexts/PathContext'
 const moment = require('moment');
+
+
 
 function CreateExercise(props) {
     const [username, setUsername] = useState("choose...");
@@ -13,8 +16,9 @@ function CreateExercise(props) {
     const [users, setUsers] = useState([]);
     const [isFirstRender, setIsFirstRender] = useState(true)
     const [alert, setAlert] = useState(false);
-    const [path, setPath] = useState(props.path)
-
+    // const [path, setPath] = useState(props.path)
+    const path = useContext(PathContext);
+    
 
     useEffect(async () => {
         // if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {

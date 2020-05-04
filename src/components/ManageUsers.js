@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Table, Form, Button, FormControl, Col, InputGroup } from 'react-bootstrap';
 import axios from 'axios'
 import './style/ManageUsers.css'
+import PathContext from '../contexts/PathContext'
 
 function ManageUsers(props) {
     const [users, setUsers] = useState([]);
     const [showEditForm, setShowEditForm] = useState(false)
-    const [path, setPath] = useState(props.path)
+    // const [path, setPath] = useState(props.path)
+const path = useContext(PathContext)
 
     useEffect(async () => {
         const res = await axios.get(`${path}/users`);

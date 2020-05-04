@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Table, Form, Button, FormControl, Col, InputGroup } from 'react-bootstrap';
 import axios from 'axios'
 import './style/ManageExercises.css'
 import DatePicker from "react-datepicker";
+import PathContext from '../contexts/PathContext'
 const moment = require('moment');
+
 
 function ManageExercises(props) {
     const [users, setUsers] = useState([]);
@@ -14,46 +16,42 @@ function ManageExercises(props) {
     const [tempDuration, setTempDuration] = useState(0);
     const [tempDate, setTempDate] = useState(new Date());
     const [showTable, setShowTable] = useState(false);
-    const [path, setPath] = useState(null)
+    // const [path, setPath] = useState(null)
 
+    const path = useContext(PathContext);
 
 
     
-    // useEffect(async () => {
-    //     if (process.env.NODE_ENV === "development") {
-    //         setPath("http://localhost:5000/")
-    //     } else {
-    //         setPath("")
-    //     }
-    //     const res = await axios.get(`${path}/users`);
-    //     if (res.data.length > 0) {
-    //         setUsers(res.data.map(user => user.username));
-    //     }
-    // }, [])
-
-
-
-
-
-
-    useEffect(() => {
-        if (process.env.NODE_ENV === "development") {
-            setPath("http://localhost:5000")
-        }
-        else {
-            setPath("")
+    useEffect(async () => {
+        const res = await axios.get(`${path}/users`);
+        if (res.data.length > 0) {
+            setUsers(res.data.map(user => user.username));
         }
     }, [])
 
-    useEffect(() => {
-        async function fetchUsers() {
-            const res = await axios.get(`${path}/users`);
-            if (res.data.length > 0) {
-                setUsers(res.data.map(user => user.username));
-            }
-        }
-        fetchUsers()
-    }, [path])
+
+
+
+
+
+    // useEffect(() => {
+    //     let path = process.env.NODE_ENV === "development" ? "http://localhost:5000" : "";
+    //     // if (process.env.NODE_ENV === "development") {
+    //     //     path = "http://localhost:5000";
+    //     // }
+    //     // else {
+    //     //     path = "";
+    //     // }
+    //     (async function fetchUsers() {
+    //         const res = await axios.get(`${path}/users`);
+    //         res.data.length > 0 && setUsers(res.data.map(user => user.username));
+    //         // if (res.data.length > 0) {
+    //         //     setUsers(res.data.map(user => user.username));
+    //         // }
+    //     })();
+    //     // fetchUsers()
+    //     setPath(path);
+    // }, [])
 
 
 
