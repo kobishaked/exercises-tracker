@@ -9,11 +9,17 @@ function ManageUsers() {
     const path = useContext(PathContext)
 
     useEffect(() => {
-        (async () => {
-            const res = await axios.get(`${path}/users`);
-            res.data.length > 0 && setUsers(res.data);
-        })()
+        getData();
+        // (async () => {
+        //     const res = await axios.get(`${path}/users`);
+        //     res.data.length > 0 && setUsers(res.data);
+        // })()
     }, [])
+
+    async function getData() {
+        const res = await axios.get(`${path}/users`);
+        res.data.length > 0 && setUsers(res.data);
+    }
 
     const tableGenerator = () => {
         return users.map(({
@@ -41,8 +47,8 @@ function ManageUsers() {
 
     return (
         <>
-            <Form.Label>see all the users in the system. <br></br>
-                <b>notice</b> - if you delete on of the users, all his exercises will deleted as well!</Form.Label>
+            <Form.Label>the users in the system. <br></br>
+                <b>notice</b> - if you delete one of the users, all his exercises will deleted as well!</Form.Label>
             <Table size="sm" className="short-table-manage-users" striped bordered hover responsive>
                 <thead>
                     <tr>

@@ -5,13 +5,9 @@ import './style/CreateExercise.css'
 import axios from 'axios'
 import PathContext from '../contexts/PathContext'
 import 'react-toastify/dist/ReactToastify.css';
-
 import { toast, ToastContainer } from 'react-toastify'
 
-
 const moment = require('moment');
-
-
 
 function CreateExercise() {
     const [username, setUsername] = useState("choose...");

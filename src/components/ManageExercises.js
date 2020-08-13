@@ -18,11 +18,17 @@ function ManageExercises() {
     const path = useContext(PathContext);
 
     useEffect(() => {
-        (async () => {
-            const res = await axios.get(`${path}/users`);
-            res.data.length > 0 && setUsers(res.data.map(user => user.username));
-        })()
+        getData()
+        // (async () => {
+        //     const res = await axios.get(`${path}/users`);
+        //     res.data.length > 0 && setUsers(res.data.map(user => user.username));
+        // })()
     }, [])
+
+    async function getData() {
+        const res = await axios.get(`${path}/users`);
+            res.data.length > 0 && setUsers(res.data.map(user => user.username));
+    }
 
     const onChangeUserName = async (e) => {
         setChoosenUser(e.target.value);
@@ -43,7 +49,6 @@ function ManageExercises() {
     }
 
     const onClickEditExercise = async (description, date, duration, id) => {
-
         setTempId(id);
         setTempDescription(description);
         setTempDuration(duration)
@@ -73,23 +78,23 @@ function ManageExercises() {
         }, index) => (
                 tempId === _id ? (
                     <tr key={_id}>
-                        <td>{index + 1}</td>
-                        <td ><input className="shorter-input" value={tempDescription} onChange={onChangeNewDescription} /></td>
-                        <td ><input className="shorter-input" value={tempDuration} onChange={onChangeNewDuration} as="input" type="number" /></td>
-                        <td >
-                            <DatePicker className='shorter-input'
+                        <td className='index'>{index + 1}</td>
+                        <td className="td-description-manage-exercises"><input className="shorter-input " value={tempDescription} onChange={onChangeNewDescription} /></td>
+                        <td className="td-duration-manage-exercises"><input className="shorter-input " value={tempDuration} onChange={onChangeNewDuration} as="input" type="number" /></td>
+                        <td className="td-date-manage-exercises">
+                            <DatePicker className='shorter-input '
                                 dateFormat="dd/MM/yyyy"
                                 selected={tempDate}
                                 onChange={onChangeDate}
                             />
                         </td>
-                        <td>
+                        <td className="btn-margin">
                             <button onClick={() => onClickSaveNewExercise(_id)}>save</button>
                         </td>
                     </tr >
                 ) : (
                         <tr key={_id}>
-                            <td>{index + 1}</td>
+                            <td className='index'>{index + 1}</td>
                             <td className="td-description-manage-exercises">{description}</td>
                             <td className="td-duration-manage-exercises">{duration}</td>
                             <td className="td-date-manage-exercises">{moment(date.toString()).format("DD/MM/YYYY")}</td>

@@ -2,6 +2,7 @@
 
 .shorter-input{
     width: 100%;
+    height: 25px;
     padding: none;
     margin: none;
 }
@@ -29,6 +30,11 @@
   margin-right: 3px;
   font-size: 13px;
 }
+
+.index{
+  width: 3%;
+}
+
 
 
 
