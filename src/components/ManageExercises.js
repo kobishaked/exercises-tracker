@@ -4,7 +4,10 @@ import axios from 'axios'
 import './style/ManageExercises.css'
 import DatePicker from "react-datepicker";
 import PathContext from '../contexts/PathContext'
+import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from 'react-toastify'
 const moment = require('moment');
+
 
 function ManageExercises() {
     const [users, setUsers] = useState([]);
@@ -16,6 +19,7 @@ function ManageExercises() {
     const [tempDate, setTempDate] = useState(new Date());
     const [showTable, setShowTable] = useState(false);
     const path = useContext(PathContext);
+    const [alert, setAlert] = useState(false);
 
     useEffect(() => {
         getData()
@@ -27,7 +31,7 @@ function ManageExercises() {
 
     async function getData() {
         const res = await axios.get(`${path}/users`);
-            res.data.length > 0 && setUsers(res.data.map(user => user.username));
+        res.data.length > 0 && setUsers(res.data.map(user => user.username));
     }
 
     const onChangeUserName = async (e) => {
@@ -55,6 +59,11 @@ function ManageExercises() {
         setTempDate(new Date(date))
     }
 
+
+
+
+
+
     const onClickSaveNewExercise = async (id) => {
         const newExercise = {
             username: choosenUser,
@@ -62,14 +71,33 @@ function ManageExercises() {
             duration: tempDuration,
             date: tempDate,
         }
-        const res = await axios.put(`${path}/exercises/update/${id}`, newExercise);
-        setExercisesByUser([...res.data]);
-        setTempId(null);
+
+        try {
+            const res = await axios.put(`${path}/exercises/update/${id}`, newExercise);
+            setExercisesByUser([...res.data]);
+            setTempId(null);
+            toast.success("changes saved!")
+        }
+        catch (e) {
+            toast.error("there is a network problem, please try again later.")
+        }
+        setAlert(true)
+
+
+
+
     }
 
     const onClickDeleteExercise = async (id) => {
-        setExercisesByUser(exercisesByUser.filter(exercise => (exercise._id !== id)))
-        await axios.delete(`${path}/users/${id}`);
+        try {
+            setExercisesByUser(exercisesByUser.filter(exercise => (exercise._id !== id)))
+            await axios.delete(`${path}/users/${id}`);
+            toast.success("exercise deleted successfully!")
+        }
+        catch (e) {
+            toast.error("there is a network problem, please try again later.")
+        }
+        setAlert(true)
     }
 
     const tableGenerator = () => {
@@ -138,11 +166,50 @@ function ManageExercises() {
                     </tbody>
                 </Table>
             )}
+            {
+                alert &&
+                <ToastContainer
+                    className="alert"
+                    autoClose={4000}
+                    position={toast.POSITION.BOTTOM_CENTER}
+                />
+            }
         </>
     )
 }
 
 export default ManageExercises
+
+
+
+
+
+
+
+
+// const onClickDeleteUser = async (e, username, id) => {
+//     try {
+//         setUsers(users.filter(user => (user._id !== id)))
+//         await axios.delete(`${path}/users/${id}`);
+//         const res = await axios.get(`${path}/exercises/`);
+//         const exercisesOfUser = res.data.filter(exercise => (
+//             exercise.username === username
+//         ))
+//         exercisesOfUser.forEach(async exercise => {
+//             await axios.delete(`${path}/exercises/${exercise._id}`);
+//         });
+//         toast.success("user deleted successfully!")
+//     }
+//     catch (e) {
+//         toast.error("please insert a name with at least 3 characters")
+//     }
+//     setAlert(true)
+
+// }
+
+
+
+
 
 
 

@@ -3,10 +3,13 @@ import { Table, Form, Button, FormControl, Col, InputGroup } from 'react-bootstr
 import axios from 'axios'
 import './style/ManageUsers.css'
 import PathContext from '../contexts/PathContext'
+import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from 'react-toastify'
 
 function ManageUsers() {
     const [users, setUsers] = useState([]);
     const path = useContext(PathContext)
+    const [alert, setAlert] = useState(false);
 
     useEffect(() => {
         getData();
@@ -34,15 +37,23 @@ function ManageUsers() {
     }
 
     const onClickDeleteUser = async (e, username, id) => {
-        setUsers(users.filter(user => (user._id !== id)))
-        await axios.delete(`${path}/users/${id}`);
-        const res = await axios.get(`${path}/exercises/`);
-        const exercisesOfUser = res.data.filter(exercise => (
-            exercise.username === username
-        ))
-        exercisesOfUser.forEach(async exercise => {
-            await axios.delete(`${path}/exercises/${exercise._id}`);
-        });
+        try {
+            setUsers(users.filter(user => (user._id !== id)))
+            await axios.delete(`${path}/users/${id}`);
+            const res = await axios.get(`${path}/exercises/`);
+            const exercisesOfUser = res.data.filter(exercise => (
+                exercise.username === username
+            ))
+            exercisesOfUser.forEach(async exercise => {
+                await axios.delete(`${path}/exercises/${exercise._id}`);
+            });
+            toast.success("user deleted successfully!")
+        }
+        catch (e) {
+            toast.error("please insert a name with at least 3 characters")
+        }
+        setAlert(true)
+
     }
 
     return (
@@ -61,9 +72,21 @@ function ManageUsers() {
                     {tableGenerator()}
                 </tbody>
             </Table>
+            {
+                alert &&
+                <ToastContainer
+                    className="alert"
+                    autoClose={4000}
+                    position={toast.POSITION.BOTTOM_CENTER}
+                />
+            }
         </>
     )
 }
+
+
+
+
 
 export default ManageUsers
 
