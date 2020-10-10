@@ -1,5 +1,5 @@
 #Exercise Tracker
-implement RESTful api app (managing users and exercises) with React, node.js (using express framework) and mongoDB.
+implement RESTfull api app (managing users and exercises) with React, node.js (using express framework) and mongoDB.
 link to the app: https://deploy-mern-application.herokuapp.com/
 
 The app may take few seconds to load at the first time according to the Heroku policy as can see at the link: https://devcenter.heroku.com/articles/free-dyno-hours
